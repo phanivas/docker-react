@@ -1,3 +1,4 @@
+language: generic 
 sudo: required
 services:
     - docker
@@ -7,4 +8,12 @@ before_install:
 
 script:
     - docker run -e CI=true phanivas/docker-react npm run test
-    
+
+deploy: 
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "docker"
+    bucket_name: "elasticbeanstalk-us-east-2-869207054276"
+    bucket_path: "docker"
+    on:
+        branch: master
